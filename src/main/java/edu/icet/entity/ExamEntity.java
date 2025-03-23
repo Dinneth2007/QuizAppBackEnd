@@ -1,10 +1,13 @@
 package edu.icet.entity;
 
+import edu.icet.dto.Question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +25,6 @@ public class ExamEntity {
     private String timeLimit;
     private Integer passingScore;
     private Integer questionCount;
+    @OneToMany(mappedBy = "examId" ,cascade = CascadeType.ALL)
+    private List<QuestionEntity> questions;
 }

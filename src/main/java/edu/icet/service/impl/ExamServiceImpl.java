@@ -1,12 +1,16 @@
 package edu.icet.service.impl;
 
 import edu.icet.dto.Exam;
+import edu.icet.dto.Question;
 import edu.icet.entity.ExamEntity;
+import edu.icet.entity.QuestionEntity;
 import edu.icet.repository.ExamRepository;
+import edu.icet.repository.QuestionRepository;
 import edu.icet.service.ExamService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,13 +23,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExamServiceImpl implements ExamService {
     final ExamRepository repository;
+    @Autowired
+    private QuestionRepository questionRepository;
     final ModelMapper mapper;
 
     @Override
     public void createExam(Exam exam) {
+        System.out.println("before mapped"+exam);
         ExamEntity map = mapper.map(exam, ExamEntity.class);
-        System.out.println(map);
-        repository.save(mapper.map(exam, ExamEntity.class));
+
+        System.out.println("After Mapped"+map);
+        ExamEntity save = repository.save(map);
+        //Set the examId of each question in the Questions list to the examId
+        for(QuestionEntity ent:map.getQuestions()){
+
+            ent.setExamId(save.getId());
+            questionRepository.save(ent);
+        }
+
+
+
     }
 
     @Override

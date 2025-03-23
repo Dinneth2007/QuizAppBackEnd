@@ -1,5 +1,6 @@
 package edu.icet.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Exam {
+    @JsonIgnore
    private Integer id;
     private String examName;
     private String description;
@@ -19,6 +21,5 @@ public class Exam {
     private String timeLimit;
     private Integer passingScore;
     private Integer questionCount;
-    @OneToMany
-    List<Question> questions;
+   private List<Question> questions;
 }
