@@ -1,9 +1,12 @@
 package edu.icet.dto;
 
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,4 +19,6 @@ public class Exam {
     private String timeLimit;
     private Integer passingScore;
     private Integer questionCount;
+    @OneToMany
+    List<Question> questions;
 }

@@ -67,7 +67,7 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public void deleteExamByCourseId(Integer integer) {
-
+    public void deleteExamByCourseId(Integer id) {
+        repository.deleteByCourseId(id);
     }
 }

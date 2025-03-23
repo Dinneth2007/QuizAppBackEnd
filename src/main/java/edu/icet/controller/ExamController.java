@@ -4,6 +4,7 @@ import edu.icet.dto.Exam;
 import edu.icet.entity.ExamEntity;
 import edu.icet.service.ExamService;
 import edu.icet.service.impl.ExamServiceImpl;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,4 +34,11 @@ public class ExamController {
 
         return service.getAll();
     }
+    @Transactional
+    @DeleteMapping("/delete/{id}")
+    void deleteByCourseId(@PathVariable Integer id){
+        service.deleteExamByCourseId(id);
+    }
+
+
 }

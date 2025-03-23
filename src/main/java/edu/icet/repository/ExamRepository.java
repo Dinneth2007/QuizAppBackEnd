@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface ExamRepository extends JpaRepository<ExamEntity,Integer> {
     List<ExamEntity> findAllByCourseId(Integer id);
+    void deleteByCourseId(Integer id);
     ExamEntity findByCourseId(Integer id);
 }
